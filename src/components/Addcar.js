@@ -1,104 +1,103 @@
 import React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import { DialogActions, DialogContent, TextField } from '@mui/material';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function Addcar({addCar}){
+export default function Addcar (props) {
+    const [open, setOpen] = React.useState(false);
+    const [car, setCar] = React.useState({
+        brand: '', model: '', color: '', fuel: '', year: '', price: ''
+    })
 
-const [open, setOpen] = React.useState(false);
-const [car, setCar] = React.useState({
-    brand: '',
-    model: '',
-    color: '',
-    fuel: '',
-    price: '',
-    year: '',
-})
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
 
-const handleClose = () => {
-    console.log("suljettiin ikkuna");
-    addCar(car);
-    setOpen(false);
-}
+    const handleClickClose = () => {
+        setOpen(false);
+    };
 
-const handleCancel = () => {
-setOpen(false);
-}
+    const handleInputChange = (event) => {
+        setCar({...car, [event.target.name] : event.target.value})
+    } 
 
-const inputChanged = (event) => {
-    setCar({...car, [event.target.name]: event.target.value})
-    console.log("syotetta muutettu" + car.brand);
+    const addCar = () => {
+        props.saveCar(car);
+        handleClickClose(); 
+    }
 
-}
-
-const handleClickOpen = () => {
-    console.log("addcar painettu")
-    setOpen(true);
-}
-
+    const inputChanged = (event) => {
+        setCar({...car, [event.target.name]: event.target.value})
+        console.log("syotetta muutettu" + car.brand);
+    
+    }
     return(
         <div>
-            <Button onClick={handleClickOpen} variant="outlined">
-            Add Car
-            </Button>
-            <Dialog onClose={handleClose} open={open}>
-                <DialogTitle>Add Car</DialogTitle>
+        <Button style={{margin : 10}} variant ="outlined" color="primary" onClick={handleClickOpen}>
+            Add car
+
+        </Button>
+        <Dialog open={open} onClose={handleClickClose} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">New Car</DialogTitle>
                 <DialogContent>
-                    <TextField 
-                            name="brand"
-                            value={car.brand}
-                            label="Brand"
-                            margin="dense"
-                            fullWidth={true}
-                            onChange={inputChanged}
-                       />
-                       <TextField 
-                            name="model"
-                            value={car.model}
-                            label="Model"
-                            margin="dense"
-                            fullWidth={true}
-                            onChange={inputChanged}
-                       />
-                       <TextField 
-                            name="color"
-                            value={car.color}
-                            label="Color"
-                            margin="dense"
-                            fullWidth={true}
-                            onChange={inputChanged}
-                       />
-                       <TextField 
-                            name="fuel"
-                            value={car.fuel}
-                            label="Fuel"
-                            margin="dense"
-                            fullWidth={true}
-                            onChange={inputChanged}
-                       />
-                       <TextField 
-                            name="year"
-                            value={car.year}
-                            label="Year"
-                            margin="dense"
-                            fullWidth={true}
-                            onChange={inputChanged}
-                       />
-                       <TextField 
-                            name="price"
-                            value={car.price}
-                            label="Price"
-                            margin="dense"
-                            fullWidth={true}
-                            onChange={inputChanged}
-                       />
-                </DialogContent>
+                    <TextField
+                    autoFocus
+                    margin="dense"
+                    name="brand"
+                    value={car.brand}
+                    onChange={inputChanged}
+                    label="brand"
+                    fullWidth
+                    />
+                    <TextField
+                    margin="dense"
+                    name="model"
+                    value={car.model}
+                    onChange={inputChanged}
+                    label="model"
+                    fullWidth
+                    />
+                      <TextField
+                    margin="dense"
+                    name="color"
+                    value={car.color}
+                    onChange={inputChanged}
+                    label="color"
+                    fullWidth
+                    />
+                      <TextField
+                    margin="dense"
+                    name="fuel"
+                    value={car.fuel}
+                    onChange={inputChanged}
+                    label="fuel"
+                    fullWidth
+                    />
+                      <TextField
+                    margin="dense"
+                    name="year"
+                    value={car.year}
+                    onChange={inputChanged}
+                    label="year"
+                    fullWidth
+                    />
+                      <TextField
+                    margin="dense"
+                    name="price"
+                    value={car.price}
+                    onChange={inputChanged}
+                    label="price"
+                    fullWidth
+                    />
+                    </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCancel}>Cancel</Button>
-                    <Button onClick={handleClose}>Save</Button>
+                    <Button onClick={handleClickClose} color="primary">Cancel</Button>
+                    <Button onClick={addCar} color="primary">Save</Button>
                 </DialogActions>
-            </Dialog>
+        </Dialog>
         </div>
     );
 }
