@@ -32,8 +32,6 @@ export default function Carlist () {
 }
 
     const updateCar = (updateCar, link) => {
-        console.log("edit painettu");
-        console.log("linkki: " + link);
         fetch(link, {
             method: 'PUT',
             headers: {'Content-type' : 'application/json'},
@@ -41,7 +39,7 @@ export default function Carlist () {
         })
         .then(response => {
             if(response.ok) {
-                console.log("onnistui");
+                console.log("Worked");
                 fetchData();
             }
             else{
@@ -70,7 +68,7 @@ export default function Carlist () {
                 fetchData();
             }
             else{
-                alert('Something went wrong when adding car');
+                alert('Something went wrong');
             }
             })
             .catch(err => console.error(err))

@@ -28,12 +28,6 @@ export default function Addcar (props) {
         props.saveCar(car);
         handleClickClose(); 
     }
-
-    const inputChanged = (event) => {
-        setCar({...car, [event.target.name]: event.target.value})
-        console.log("syotetta muutettu" + car.brand);
-    
-    }
     return(
         <div>
         <Button style={{margin : 10}} variant ="outlined" color="primary" onClick={handleClickOpen}>
@@ -48,7 +42,7 @@ export default function Addcar (props) {
                     margin="dense"
                     name="brand"
                     value={car.brand}
-                    onChange={inputChanged}
+                    onChange = {e => handleInputChange(e)}
                     label="brand"
                     fullWidth
                     />
@@ -56,7 +50,7 @@ export default function Addcar (props) {
                     margin="dense"
                     name="model"
                     value={car.model}
-                    onChange={inputChanged}
+                    onChange = {e => handleInputChange(e)}
                     label="model"
                     fullWidth
                     />
@@ -64,7 +58,7 @@ export default function Addcar (props) {
                     margin="dense"
                     name="color"
                     value={car.color}
-                    onChange={inputChanged}
+                    onChange = {e => handleInputChange(e)}
                     label="color"
                     fullWidth
                     />
@@ -72,7 +66,7 @@ export default function Addcar (props) {
                     margin="dense"
                     name="fuel"
                     value={car.fuel}
-                    onChange={inputChanged}
+                    onChange = {e => handleInputChange(e)}
                     label="fuel"
                     fullWidth
                     />
@@ -80,7 +74,7 @@ export default function Addcar (props) {
                     margin="dense"
                     name="year"
                     value={car.year}
-                    onChange={inputChanged}
+                    onChange = {e => handleInputChange(e)}
                     label="year"
                     fullWidth
                     />
@@ -88,7 +82,7 @@ export default function Addcar (props) {
                     margin="dense"
                     name="price"
                     value={car.price}
-                    onChange={inputChanged}
+                    onChange = {e => handleInputChange(e)}
                     label="price"
                     fullWidth
                     />
